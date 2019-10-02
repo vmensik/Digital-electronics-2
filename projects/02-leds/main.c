@@ -37,12 +37,13 @@ int main(void)
     /* Set output pin */
     DDRB |= _BV(LED_GREEN);         /* DDRB = DDRB or (0010 0000) */
     DDRB |= _BV(LED_STANDALONE);
-    DDRD |= _BV(LED_STANDALONE);
+    DDRD &= ~_BV(BTN); 
 
 
     /* Turn LED off */
-    PORTB &= _BV(LED_GREEN);       /* PORTB = PORTB and (0010 0000) */
-    PORTB &= _BV(LED_STANDALONE); 
+    PORTB &= ~_BV(LED_GREEN);       /* PORTB = PORTB and (0010 0000) */
+    PORTB |= _BV(LED_STANDALONE);
+    PORTD |= _BV(BTN);
     /* Infinite loop */
     for (;;)
     {
