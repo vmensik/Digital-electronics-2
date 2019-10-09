@@ -1,4 +1,4 @@
-#include "gpio.h"
+#include "GPIO.h"
 
 /*
  * Configures given GPIO pin to output mode. 

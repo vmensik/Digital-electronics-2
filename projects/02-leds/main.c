@@ -15,7 +15,6 @@
 /* Includes ----------------------------------------------------------*/
 #include <avr/io.h>
 #include <util/delay.h>
-#include <library/inc/GPIO.h>
 
 /* Typedef -----------------------------------------------------------*/
 /* Define ------------------------------------------------------------*/
@@ -36,41 +35,26 @@
 int main(void)
 {
     /* Set output pin */
-    /*
-    DDRB |= _BV(LED_GREEN);         
+    DDRB |= _BV(LED_GREEN);         /* DDRB = DDRB or (0010 0000) */
     DDRB |= _BV(LED_STANDALONE);
     DDRD &= ~_BV(BTN); 
-    */
-    GPIO_config_output(DDRB, LED_GREEN);
-    GPIO_config_output(DDRB, LED_STANDALONE);
-    GPIO_config_input_pullup(DDRD, BTN);
-    /* Turn LED off */
-    GPIO_write(PORTB, LED_GREEN, 0)
-    GPIO_write(PORTB, LED_STANDALONE, 0)
 
-    /*
-    PORTB &= ~_BV(LED_GREEN);       
+
+    /* Turn LED off */
+    PORTB &= ~_BV(LED_GREEN);       /* PORTB = PORTB and (0010 0000) */
     PORTB |= _BV(LED_STANDALONE);
     PORTD |= _BV(BTN);
-    */
     /* Infinite loop */
     for (;;)
     {
         /* Invert LED and delay */
-
-        if(GPIO_read(PORTD, BTN)) {
-          GPIO_toggle(PORTB, LED_GREEN);
-          GPIO_toggle(PORTB, LED_STANDALONE);
-          _delay_ms(BLINK_DELAY);
-        }
-    /*    
+        
         if (bit_is_clear(PIND, BTN))  {
-
-          PORTB ^= _BV(LED_GREEN);    
+          PORTB ^= _BV(LED_GREEN);    /* PORTB = PORTB xor (0010 0000) */
           PORTB ^= _BV(LED_STANDALONE);
-          _delay_ms(BLINK_DELAY); 
+          _delay_ms(BLINK_DELAY); /* Wait for several milisecs */
         }
-    */  
+      
     }
 
     return (0);
