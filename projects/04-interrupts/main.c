@@ -61,6 +61,7 @@ int main(void)
 /**
  *  Brief: Timer/Counter0 overflow interrupt routine. Toggle green LED.
  */
+ 
 ISR(TIMER0_OVF_vect)
 {
     GPIO_toggle(&PORTB, LED_GREEN);
@@ -73,3 +74,4 @@ ISR(TIMER1_OVF_vect)
 {
     GPIO_toggle(&PORTB, LED_RED);
 }
+
