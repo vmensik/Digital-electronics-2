@@ -27,7 +27,5 @@ void TIM_config_prescaler(uint8_t timer_name,
 void TIM_config_interrupt(uint8_t timer_name,
                           uint8_t interr_mode);
 
-void TIM_config_PWM(uint8_t timer_name, uint8_t interr_mode)
-
 #endif /* TIMER_H_INCLUDED */
 
