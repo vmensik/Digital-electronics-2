@@ -86,6 +86,41 @@ ISR(TIMER1_OVF_vect)
  *  Brief: Test one TWI address.
  */
 
+void twi_read_sensor(void) {
+    static uint8_t addr = 0x5c;
+    static uint8_t reg_addr = 0x00;
+    char uart_string[4];
+
+    uint8_t H_i = 0, H_f = 0, T_i = 0, T_f = 0;
+    
+    twi_start((addr<<1) + TWI_WRITE);
+    twi_write(reg_addr);
+    twi_stop();
+
+    twi_start((addr<<1) + TWI_READ);
+    H_i = twi_read_ack();
+    H_f = twi_read_ack();
+    T_i = twi_read_ack();
+    T_f = twi_read_nack();
+
+    itoa(H_i, uart_string, 10);
+    uart_puts(uart_string);
+    uart_putc(',');
+
+            
+    itoa(H_f, uart_string, 10);
+    uart_puts(uart_string);
+    uart_puts("\n\r");
+
+    itoa(T_i, uart_string, 10);
+    uart_puts(uart_string);
+    uart_putc(',');
+    itoa(T_f, uart_string, 10);
+    uart_puts(uart_string);
+    uart_puts("\n\r");
+}
+
+
 void fsm_twi_read_sensor(void) {
     static uint8_t addr = 0x5c;
     static uint8_t reg_addr = 0x00;

@@ -77,38 +77,12 @@ int main(void)
  */
 ISR(TIMER1_OVF_vect)
 {
-    //fsm_twi_scanner();
+    fsm_twi_scanner();
 }
 
 /**
  *  Brief: Test one TWI address.
  */
-
-void fsm_twi_read_sensor(void) {
-    static uint8_t addr = 0x57; 
-    uint8_t status;
-    char uart_string[7];
-    switch(current_state) {
-        case IDLE_STATE:
-            current_state = TRY_STATE;
-            break;
-        case TRY_STATE:
-            status = twi_start((addr<<1) + TWI_WRITE);
-             if (status == 0) {
-                current_state = ACK_STATE;
-            } else {
-                addr++;
-                current_state = IDLE_STATE;
-            }
-            break;
-        case ACK_STATE:
-            current_state = READ_STATE;
-            break;
-        case READ_STATE:
-            
-    }
-
-}
 
 void fsm_twi_scanner(void)
 {
