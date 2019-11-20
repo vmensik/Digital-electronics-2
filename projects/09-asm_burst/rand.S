@@ -24,6 +24,20 @@
 #define input   r24
 
 ;* Functions -----------------------------------------------------------
+
+.global burst_asm
+burst_asm:
+    push r24             ; Save "Result" on Stack
+    l1:
+    sbi PORTB, 5
+    cbi PORTB, 5
+    subi r24, 1
+    cpi r24, 0
+    brne l1
+    pop result              ; Restore "Result" from Stack
+    ret                  
+
+
 ;* LFSR-based 4-bit pseudo-random generator.
 ;* Input:  r24 - Current value of shift register
 ;* Return: r24 - New value of shift register
